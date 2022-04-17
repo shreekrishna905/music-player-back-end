@@ -35,6 +35,13 @@ module.exports =  class User {
         }
     }
 
+    static removeSongFromPlaylist(username,trackId){
+        let index = users.findIndex(user => user.username==username);
+        let trackIndex = users[index].playlist.findIndex(song => song.id==trackId);
+        console.log(`Removing a track with id: ${trackId} from playlist`);
+        users[index].playlist.splice(trackIndex,1);
+    }
+
     static isSongExist(username,song){
         let index = users.findIndex(user => user.username==username);
         if(users[index].playlist.findIndex(s => s.id==song.id) >=0){
