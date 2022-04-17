@@ -1,7 +1,16 @@
 let moment = require('moment');
 const AccessDenied = require('../errors/AccessDenied')
 
-users = [{username:'shree',password:'$hree',access_token:'',playlist:[{id:1,title:'Numb',release_date:'2010-01-19'},{id:2,title:'Gloden Eye',release_date:'2020-01-01'}]}]
+users = [
+    {username:'shree',password:'$hree',access_token:'',playlist:[
+    {id:1,title:'Hold On',releaseDate:'2015-09-08',source:'hold-on.mp3'},
+    {id:2,title:'Poison',releaseDate:'1992-10-32',source:'poison.mp3'}]
+    },
+    {username:'ashok',password:'@shok',access_token:'',playlist:[
+        {id:3,title:'Vision of Love',releaseDate:'2015-05-15',source:'vision.mp3'},
+          {id:4,title:'Nothing Compares 2 U',releaseDate:'2017-10-32',source:'nothing.mp3'}]
+        },
+]
 
 module.exports =  class User {
 
@@ -19,9 +28,19 @@ module.exports =  class User {
         return false;
     }
 
+    static addSongToPlaylist(username, song){
+        let index = users.findIndex(user => user.username==username);
+        users[index].playlist.push(song);
+    }
+
     static findPlaylistByUserName(username){
+        console.log(`Playlist for username:${username}`)
         return users.find(user => user.username ==username)
                     .playlist;
+    }
+
+    static findUserByAccessToken(accessToken){
+        return users.find(user => user.access_token==accessToken).username;
     }
 
     static login(username, password){
