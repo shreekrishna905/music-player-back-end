@@ -12,7 +12,7 @@ app.use(cors());
 
 app.use(express.json());
 
-app.use('/login', loginRouter);
+app.use('/auth', loginRouter);
 
 app.all('/api/*', function(req, res, next){
     const clientToken =  req.headers["x-access-token"];

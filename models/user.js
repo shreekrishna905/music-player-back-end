@@ -30,11 +30,22 @@ module.exports =  class User {
 
     static addSongToPlaylist(username, song){
         let index = users.findIndex(user => user.username==username);
-        users[index].playlist.push(song);
+        if(!User.isSongExist(username,song)){
+            users[index].playlist.push(song);
+        }
+    }
+
+    static isSongExist(username,song){
+        let index = users.findIndex(user => user.username==username);
+        if(users[index].playlist.findIndex(s => s.id==song.id) >=0){
+            console.log(`Song with id:${song.id} already exist in playlist`);
+            return true;
+        }
+        return false;
     }
 
     static findPlaylistByUserName(username){
-        console.log(`Playlist for username:${username}`)
+        console.log(`Playlist for username:${username}`);
         return users.find(user => user.username ==username)
                     .playlist;
     }
