@@ -3,8 +3,8 @@ const userController = require('../controllers/userController');
 
 const router = express.Router();
 
-router.get('/playlists', userController.playlist);
-router.post('/playlists/tracks', userController.addTrack);
-router.delete('/playlists/tracks/:trackId', userController.removeTrack);
+router.get('/',userController.playlist);
+router.post('/tracks', userController.addTrack);
+router.delete('/tracks/:trackId', userController.removeTrack);
 
 module.exports = router;
